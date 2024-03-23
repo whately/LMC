@@ -33,16 +33,15 @@
       <p>Este site contém a implementação do <a href="https://pt.wikipedia.org/wiki/Little_man_computer">Little Man Computer.</a></p>
       <p>É uma tradução e adaptação do simulador da <a href="https://github.com/Wellingborough/LMC">Wellingborough School.</a></p>
       <p>O Simulador é implementado usindo JavaScript, HTML e CSS and executa inteiramente no navegador.</p>
-      <p>É totalmente funcional, e inclui vários programas de exemplo.</p>
+      <p>Ele é totalmente funcional, e inclui vários programas de exemplo.</p>
 
       <p><a href="https://whately.github.io/LMC/LMC0.3.html" style="background-color: #4CAF50; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;">Iniciar o Simuldor!</a></p>
       <p>O objetivo é criar uma aplicação web simples que permita os alunos a programarem na linguagem LMC e no entendimento da máquina de Von Neumann</p>.<br />
       
       <p>O aplicativo apresenta um diagrama de UCP clicável que é animado quando um programa LMC é executado, mostrando os valores nos registros principais, fluxos de dados dentro da UCP e atividade de leitura e gravação de memória.</p>
       <p><img src="images/CPUSchematic.png" alt="Figura do esquematico da UCP, mostrando a ULA, Contador de Programa, Registrador de Instruções e outros componentes, junto com o fluxo de informações entre eles." width="600" style="border: 2px solid #555;"></p>
-      <p>Clicking on a register when the program is not running will display a brief description.  The registers shown are:<p>
-      <p>Clicando em um registrador, quando o programa não está em execução, irá mostrar uma breve descrição.  Os registrados mostrados são:<p>
 
+      <p>Clicando em um registrador, quando o programa não está em execução, irá mostrar uma breve descrição.  Os registrados mostrados são:<p>
       <table>
         <tr>
           <th>Registrador</th>
@@ -67,7 +66,6 @@
         <tr>
           <td>Entrada</td>
           <td>Dispositivo de Entrada</td>
-          <td>The 'mail used to hold user input before it is moved to the Accumulator.  When an 'INP' instruction is executed, the user is prompted to enter a value which will be placed into this 'mailbox' and then moved into the Accumulator.</td>
           <td>O dispositivo usado para armazenar a entrada do usuário antes de ser movido para o acumulador. Quando uma instrução 'INP' é executada, o usuário é solicitado a inserir um valor que será colocado neste dispositivo e depois movido para o acumulador.</td>
         </tr>
         <tr>
@@ -93,7 +91,6 @@
         <tr>
           <td>SR</td>
           <td>Registrado de Status</td>
-          <td>The Status Register is an important component in any modern processor.  When the ALU has completed an operation, the Status Register is updated with information about that operation.  In this simulator, only three bits are used: the Least Significant Bit (bit 0) is an overflow flag - if the result of an addition is greater than 999, or the result of a subtraction is less than -999, this flag will be set to 1.  Bit 1 is used to record whether the result of an operation is zero, and bit 2 is used to record whether the result of an operation is positive (zero or more).  Bits 1 and 2 are used in the 'BRZ' and 'BRP' operations.</td>
           <td>O Registrador de Status é um componente importante em qualquer processador moderno. Quando a ULA conclui uma operação, o Registro de Status é atualizado com informações sobre essa operação. Neste simulador, apenas três bits são usados: o Bit Menos Significativo (bit 0) é um flag de overflow - se o resultado de uma adição for maior que 999, ou o resultado de uma subtração for menor que -999, esse flag será definido como 1. O bit 1 é usado para registrar se o resultado de uma operação é zero e o bit 2 é usado para registrar se o resultado de uma operação é positivo (zero ou mais). Os bits 1 e 2 são usados nas operações 'BRZ' e 'BRP'.</td>
         </tr>
         <tr>
@@ -103,15 +100,15 @@
         </tr>
       </table>
       
-      <p>O editor de código é baseado em um design de tabela, facilitando a separação de rótulos, operadores e operandos</p>
+      <p>O editor de código é baseado em uma tabela, com colunas para rótulos, operadores e operandos</p>
       <p>Quando um programa está em execução, a linha de código atual é mostrada com um ponto verde e o valor das variáveis é atualizado no Editor de Código e também na memória<p>
       <p><img src="images/CodeEditor.png" alt="Imagem do editor de código LMC, com um programa de amostra carregado" style="border: 2px solid #555;"><p>
-      <p>Os programas podem ser salvos em disco local, carregados do armazenamento local e convertidos em PDF para impressão.</p>
-       <p>Quando um programa LMC está em execução, o console fornece um resumo de cada operação.</p>
-       <p><img src="images/Console.png" alt="Imagem do console LMC mostrando algumas informações de status de um programa em execução" style="border: 2px solid #555;"></p>
-       <p>O aplicativo Simulador Little Man Computer pode ser encontrado <a href="https://whately.github.io/LMC/LMC0.3.html">aqui</a></p>
-       <p><img src="images/WholeUI.png" alt="Imagem da interface de usuário completa do LMC" width="800" style="border: 2px solid #555;"></p>
-       <p>O código-fonte deste simulador LMC está disponível sob a GNU General Public License v3.0.</p>
+      <p>Os programas podem ser salvos e carregados do disco local, e também convertidos em PDF para impressão.</p>
+      <p>Quando um programa LMC está em execução, o console fornece um resumo de cada operação.</p>
+      <p><img src="images/Console.png" alt="Imagem do console LMC mostrando algumas informações de status de um programa em execução" style="border: 2px solid #555;"></p>
+      <p>O aplicativo Simulador Little Man Computer pode ser encontrado <a href="https://whately.github.io/LMC/LMC0.3.html">aqui</a></p>
+      <p><img src="images/WholeUI.png" alt="Imagem da interface de usuário completa do LMC" width="800" style="border: 2px solid #555;"></p>
+      <p>O código-fonte deste simulador LMC está disponível sob a GNU General Public License v3.0.</p>
     </div>
   </body>
 </html>
