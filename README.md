@@ -5,7 +5,7 @@ Este site contém uma implementação do [Little Man Computer](https://pt.wikipe
 O simulador é implementado usando JavaScript, HTML e CSS e roda inteiramente no navegador.
 Ele é totalmente funcional e inclui vários programas de exemplo.
 
-<a href="https://whately.github.io/LMC/LMC0.3.html" class="button">Vamos começar!</a>
+<a href="https://whately.github.io/LMC/" class="button">Vamos começar!</a>
 
 O objetivo é oferecer uma aplicação web simples que ajude os alunos a programar na linguagem LMC e entender a arquitetura de Von Neumann.
 O aplicativo apresenta um diagrama de UCP clicável que é animado quando um programa LMC é executado, mostrando os valores nos registros principais, 
