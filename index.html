@@ -35,8 +35,8 @@
       <p>O Simulador é implementado usindo JavaScript, HTML e CSS and executa inteiramente no navegador.</p>
       <p>Ele é totalmente funcional, e inclui vários programas de exemplo.</p>
 
-      <p><a href="https://whately.github.io/LMC/LMC0.3.html" style="background-color: #4CAF50; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;">Iniciar o Simuldor!</a></p>
-      <p>O objetivo é criar uma aplicação web simples que permita os alunos a programarem na linguagem LMC e no entendimento da máquina de Von Neumann.</p></br>
+      <p><a href="https://whately.github.io/LMC/LMC0.3.html" style="background-color: #4CAF50; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;">Iniciar o Simulador!</a></p>
+      <p>O objetivo é criar uma aplicação web simples que permita os alunos a programarem na linguagem LMC e no entendimento da máquina de Von Neumann.</p>
       
       <p>O aplicativo apresenta um diagrama de UCP clicável que é animado quando um programa LMC é executado, mostrando os valores nos registros principais, fluxos de dados dentro da UCP e atividade de leitura e gravação de memória.</p>
       <p><img src="images/CPUSchematic.png" alt="Figura do esquematico da UCP, mostrando a ULA, Contador de Programa, Registrador de Instruções e outros componentes, junto com o fluxo de informações entre eles." width="600" style="border: 2px solid #555;"></p>
@@ -54,7 +54,7 @@
           <td>O Contador de Programa contém o endereço da próxima instrução a ser buscada na memória. Se você observar atentamente enquanto um programa está sendo executado, verá que o PC incrementa uma unidade assim que uma instrução é lida da memória. As instruções de ramificação ('BRA', 'BRZ' e 'BRP') podem alterar o valor no PC, fazendo com que a execução do programa 'pule' para o novo endereço na memória.</td>
         </tr>
         <tr>
-          <td>RI</td>
+          <td>CIR</td>
           <td>Registrador de Instrução</td>
           <td>O Registrador de Instrução contém a última instrução buscada na memória através do MDR. Antes que a instrução possa ser executada, ela deve ser decodificada em um conjunto de sinais pelo componente DECODER</td>
         </tr>
@@ -64,19 +64,19 @@
           <td>O decodificador pega o código da instrução do RI e o transforma em um conjunto de sinais para controlar a execução da instrução.</td>
         </tr>
         <tr>
-          <td>Entrada</td>
+          <td>Input</td>
           <td>Dispositivo de Entrada</td>
           <td>O dispositivo usado para armazenar a entrada do usuário antes de ser movido para o acumulador. Quando uma instrução 'INP' é executada, o usuário é solicitado a inserir um valor que será colocado neste dispositivo e depois movido para o acumulador.</td>
         </tr>
         <tr>
-          <td>ULA</td>
+          <td>ALU</td>
           <td>Unidade Lógica e Aritmética</td>
-          <td>The ULA é responsável pela operações 'ADD' and 'SUB'. Em um processador moderno, a ULA é muito mais complexa, mas o conjunto de instruções do Little Man Computer possui apenas essas duas operações aritméticas. </td>
+          <td>A ALU é responsável pela operações 'ADD' and 'SUB'. Em um processador moderno, a ALU é muito mais complexa, mas o conjunto de instruções do Little Man Computer possui apenas essas duas operações aritméticas. </td>
         </tr>
         <tr>
           <td>ACC</td>
           <td>Acumulador</td>
-          <td>O Acumulador normalmente armazena o resultado da última operação executada pela ULA, mas o valor também pode ser inserido de uma leitura da Memória, usando a instrução 'LDA'.  O valor do Acumulador pode ser armazenado na Memória usando a instrução 'STA'.  Finalmente, o Acumulador pode ser carregado com valores do dispositivo de entrada, usando a instrução 'INP', ou para enviar valores no dispositivo de saída, com a instrução 'OUT'</td>
+          <td>O Acumulador normalmente armazena o resultado da última operação executada pela ALU, mas o valor também pode ser inserido de uma leitura da Memória, usando a instrução 'LDA'.  O valor do Acumulador pode ser armazenado na Memória usando a instrução 'STA'.  Finalmente, o Acumulador pode ser carregado com valores do dispositivo de entrada, usando a instrução 'INP', ou para enviar valores no dispositivo de saída, com a instrução 'OUT'</td>
         </tr>
         <tr>
           <td>MAR</td>
@@ -86,15 +86,15 @@
         <tr>
           <td>MDR</td>
           <td>Registrador de dados da Memória</td>
-          <td>O registrador de dados da memória contém um valor que foi lido da memória ou que está prestes a ser escrito na memória. É importante observar que este valor pode ser uma instrução ou um dado. No caso de uma instrução, esta sempre terá sido lida da Memória como parte do ciclo Busca-DEcodifica-Executa. No caso de dados, o valor pode ser lido da memória (em uma instrução 'LDA', 'SUB' ou 'ADD') ou escrito na memória (em uma instrução 'STA').</td>
+          <td>O registrador de dados da memória contém um valor que foi lido da memória ou que está prestes a ser escrito na memória. É importante observar que este valor pode ser uma instrução ou um dado. No caso de uma instrução, esta sempre terá sido lida da Memória como parte do ciclo Busca-Decodifica-Executa. No caso de dados, o valor pode ser lido da memória (em uma instrução 'LDA', 'SUB' ou 'ADD') ou escrito na memória (em uma instrução 'STA').</td>
         </tr>
         <tr>
           <td>SR</td>
           <td>Registrado de Status</td>
-          <td>O Registrador de Status é um componente importante em qualquer processador moderno. Quando a ULA conclui uma operação, o Registro de Status é atualizado com informações sobre essa operação. Neste simulador, apenas três bits são usados: o Bit Menos Significativo (bit 0) é um flag de overflow - se o resultado de uma adição for maior que 999, ou o resultado de uma subtração for menor que -999, esse flag será definido como 1. O bit 1 é usado para registrar se o resultado de uma operação é zero e o bit 2 é usado para registrar se o resultado de uma operação é positivo (zero ou mais). Os bits 1 e 2 são usados nas operações 'BRZ' e 'BRP'.</td>
+          <td>O Registrador de Status é um componente importante em qualquer processador moderno. Quando a ALU conclui uma operação, o Registro de Status é atualizado com informações sobre essa operação. Neste simulador, apenas três bits são usados: o Bit Menos Significativo (bit 0) é um flag de overflow - se o resultado de uma adição for maior que 999, ou o resultado de uma subtração for menor que -999, esse flag será definido como 1. O bit 1 é usado para registrar se o resultado de uma operação é zero e o bit 2 é usado para registrar se o resultado de uma operação é positivo (zero ou mais). Os bits 1 e 2 são usados nas operações 'BRZ' e 'BRP'.</td>
         </tr>
         <tr>
-          <td>Saída</td>
+          <td>Output</td>
           <td>Dispositivo de Saída</td>
           <td>O dispositivo usado para a saída do Acumulador. Quando uma instrução 'OUT' é executada, o valor corrente do acumulador é transferido para o dispositivo de saída and mostrado para o usuário.</td>
         </tr>
