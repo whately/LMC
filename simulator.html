@@ -77,8 +77,8 @@
           <div class="row content" id="code-table"  style="margin:0px;height: 80vh; max-height: 80vh;"></div>
           <div class="footer" id="code-table-buttons" style="background-color: #A0A0A0;padding:8px;" class="footer">
             <input id="load-btn" type="file" style="display:none;">
-            <button id="assemble-button" class="button" onclick="assembleCode()">Assemble</button>
-            <button id="clear-button" onclick="clearCode()" class="button">Clear</button>
+            <button id="assemble-button" class="button" onclick="assembleCode()">Converter</button>
+            <button id="clear-button" onclick="clearCode()" class="button">Limpar</button>
           </div>
 
         </div>
@@ -95,19 +95,19 @@
           </div>
           <div class="row" id="cpu-button-holder">
             <div class="footer" style="display:flex; gap:20px; background-color: #A0A0A0;padding: 8px; flex-wrap: nowrap; justify-content: flex-start; align-items: center;">
-              <button id="run-btn" class="button" onclick="runCode()">Run</button>
-              <button id="stop-btn" class="button" onclick="allStop()">Stop</button>
-              <button id="resume-btn" class="button" onclick="allAhead()">Resume</button>
-              <button id="next-btn" class="button" onclick="stepCode()">Next</button>
-              <p id="state-label" style="margin:0px;">Ready</p>
+              <button id="run-btn" class="button" onclick="runCode()">Executar</button>
+              <button id="stop-btn" class="button" onclick="allStop()">Parar</button>
+              <button id="resume-btn" class="button" onclick="allAhead()">Voltar</button>
+              <button id="next-btn" class="button" onclick="stepCode()">Proximo</button>
+              <p id="state-label" style="margin:0px;">Pronto</p>
             </div>
           </div>
 
 
           <div class="row footer" id="I-O-Console-holder" style="margin: 0px;">
             <div class="col-sm-3" style="padding:0px;">
-              <div id="input-div" style="padding:0px; align-items: left;"><p style="margin:0px"><span style="padding: 8px;">Input:</span><input type="number" id="input-text" min="0" max="999" ><button onclick="processInput()" id="input-button">Enter</button></div>
-              <div class="col-sm-3" id="output-div" style="padding:8px; width:100%;"><p style="margin:0px; width:100%;"><span style="padding: 8px;">Output:</span><textarea id="output-text" rows="10" readonly="true" style="width:100%; resize:none;"></textarea></p></div>
+              <div id="input-div" style="padding:0px; align-items: left;"><p style="margin:0px"><span style="padding: 8px;">Entrada:</span><input type="number" id="input-text" min="0" max="999" ><button onclick="processInput()" id="input-button">Inserir</button></div>
+              <div class="col-sm-3" id="output-div" style="padding:8px; width:100%;"><p style="margin:0px; width:100%;"><span style="padding: 8px;">Saída:</span><textarea id="output-text" rows="10" readonly="true" style="width:100%; resize:none;"></textarea></p></div>
             </div>
 
             <div id="log-div" class="col-sm-9">
@@ -129,12 +129,12 @@
         <div class="modal-content">
           <div class="modal-header">
             <i class="fa-solid fa-gear fa-2x" style="margin: 8px 8px;"></i>
-            <h4 class="modal-title" style="margin-left: 8px;">LMC Simulation Settings</h4>
+            <h4 class="modal-title" style="margin-left: 8px;">Configuração do Simulador</h4>
           </div>
           <div class="modal-body">
             <div class="row">
               <div class="col col-10">
-                <label for="setting-show-data-flows">Show data flows around the CPU during program execution</label><br>            
+                <label for="setting-show-data-flows">Mostrar fluxos de dados ao redor da UCP durante a execução do programa</label><br>            
               </div>
               <div class="col col-2">
                 <input type="checkbox" name="showDataFlows" value="1" checked id="setting-show-data-flows" style="margin:8px;">            
@@ -143,7 +143,7 @@
 
             <div class="row">
               <div class="col col-10">
-                <label for="setting-show-variable-values">Show variable values in the code table during program execution</label><br>
+                <label for="setting-show-variable-values">Mostrar valores de variáveis na tabela de códigos durante a execução do programa</label><br>
               </div>
               <div class="col col-2">
                 <input type="checkbox" name="showVariableValuesInCode" value="1" checked id="setting-show-variable-values" style="margin:8px;">
@@ -152,7 +152,7 @@
 
             <div class="row">
               <div class="col col-10">
-                <label for="setting-show-memory-access">Show memory read/write locations during program execution</label>
+                <label for="setting-show-memory-access">Mostrar locais de leitura/gravação de memória durante a execução do programa</label>
               </div>
               <div class="col col-2">
                 <input type="checkbox" name="showMemoryAccess" value="1" checked id="setting-show-memory-access" style="margin:8px;">
@@ -161,18 +161,18 @@
             <br><br>
             <div class="row">
               <div class="col col-6">
-                <label for="setting-speed">Execution Speed</label>
+                <label for="setting-speed">Taxa de Execução</label>
               </div>
               <div class="col col-4">
                 <input type="range" name="executionSpeed" id="setting-speed" min="0" max="4" step="1" value="2" onchange="changeSetting('speed')">
               </div>
             </div>
             <br><br>
-            <p id="speed-display"><i class="fa-regular fa-hand"></i>Run at Medium speed - about 0.5 seconds per cycle</p>
+            <p id="speed-display"><i class="fa-regular fa-hand"></i>Execute em taxa média – cerca de 0,5 segundos por ciclo</p>
           </div>
           <div class="modal-footer">
-            <button id="settings-cancel-btn" class="button" onclick="cancelSettings()" data-bs-dismiss="modal">Cancel</button>
-            <button id="settings-save-btn" class="button" onclick="saveSettings()" data-bs-dismiss="modal">Save</button>
+            <button id="settings-cancel-btn" class="button" onclick="cancelSettings()" data-bs-dismiss="modal">Cancelar</button>
+            <button id="settings-save-btn" class="button" onclick="saveSettings()" data-bs-dismiss="modal">Salvar</button>
           </div>
         </div>
       </div>
@@ -184,16 +184,16 @@
         <div class="modal-content">
           <div class="modal-header">
             <i class="fa-solid fa-file-code fa-2x" style="margin: 8px 8px;"></i>
-            <h4 class="modal-title" style="margin-left: 8px;">LMC Example Programs</h4>
+            <h4 class="modal-title" style="margin-left: 8px;">Programas Exemplos</h4>
           </div>
           <div class="modal-body">
-            <p>Select an example to load:</p>
+            <p>Selecione um exemplo para inserir</p>
             <div class="row">
               <div class="col col-1">
                 <input type="radio" id="example1" name="example_select" value=1 checked>
               </div>
               <div class="col col-11">
-                <label for="example1">Example 1 - Add two numbers together</label>
+                <label for="example1">Exemplo 1 - Some 2 números</label>
               </div>
             </div>
             <div class="row">
@@ -201,7 +201,7 @@
                 <input type="radio" id="example2" name="example_select" value=2>
               </div>
               <div class="col col-11">
-                <label for="example2">Example 2 - Output a pattern of 1s and 0s</label>
+                <label for="example2">Exemplo 2 - Gerar um padrão de 1s e 0s</label>
               </div>
             </div>
             <div class="row">
@@ -209,7 +209,7 @@
                 <input type="radio" id="example3" name="example_select" value=3>
               </div>
               <div class="col col-11">
-                <label for="example3">Example 3 - Calculate the square of a number</label>
+                <label for="example3">Exemplo 3 - Calcular o quadrado de um número</label>
               </div>
             </div>
             <div class="row">
@@ -217,13 +217,13 @@
                 <input type="radio" id="example4" name="example_select" value=4>
               </div>
               <div class="col col-11">
-                <label for="example4">Example 4 - Integer division</label>
+                <label for="example4">Exemplo 4 - Divisão inteira</label>
               </div>
             </div>
           </div>
           <div class="modal-footer" style="margin-top:20px;">
-            <button id="examples-close-btn" class="button" onclick="closeExamples()" data-bs-dismiss="modal">Cancel</button>
-            <button id="examples-load-btn" class="button" onclick="loadExample()" data-bs-dismiss="modal">Load</button>
+            <button id="examples-close-btn" class="button" onclick="closeExamples()" data-bs-dismiss="modal">Cancelar</button>
+            <button id="examples-load-btn" class="button" onclick="loadExample()" data-bs-dismiss="modal">Inserir</button>
           </div>
         </div>
       </div>
@@ -235,47 +235,45 @@
         <div class="modal-content">
           <div class="modal-header">
             <i class="fa-solid fa-pen-to-square fa-2x" style="margin: 8px 8px;"></i>
-            <h4 class="modal-title" style="margin-left: 8px;">LMC Editor Help</h4>
+            <h4 class="modal-title" style="margin-left: 8px;">Ajuda do Editor</h4>
           </div>
           <div class="modal-body">
             <p>
-            The Code Editor is based on a grid system, with columns for you to enter
-            labels, operators and operands.
-            The left-most column is used to show which line of code is being executed when the program
-            is running, and the 'Line' column shows non-editable line numbers.
+            O Editor de Códigos é baseado em um sistema de grade, com colunas para você inserir rótulos, operadores e operandos.
+            A coluna mais à esquerda é usada para mostrar qual linha de código está sendo executada quando o programa está em 
+            execução, e a coluna 'Linha' mostra números de linha não editáveis.
             </p>
             <p>
-            You can move between lines and columns by pressing the Tab key, or by using the cursor keys.
+            Você pode mover-se entre linhas e colunas pressionando a tecla Tab ou usando as teclas do cursor.
             </p>
             <p>
-            Ctrl-Z and Ctrl-Y will undo and redo the last edit, but only if you are not editing a cell in the Code Editor.
+            Ctrl-Z e Ctrl-Y irão desfazer e refazer a última edição, mas somente se você não estiver editando uma célula no Editor de Código.
             </p>
             <p>
-            Select a line by left-clicking anywhere on the line.  The line will be highlighted.
+            Selecione uma linha clicando com o botão esquerdo em qualquer lugar da linha. A linha será destacada.
             </p>
             <p>
-            You can delete the current line using the Del or Delete key - all of the subsequent lines will be moved up.
+            Você pode excluir a linha atual usando a tecla Del ou Delete - todas as linhas subsequentes serão movidas para cima.
             </p>
             <p>
-            Pressing the Ins or Insert key will create a new line above the current line, moving all subsequent lines down.
+            Pressionar a tecla Ins ou Insert criará uma nova linha acima da linha atual, movendo todas as linhas subsequentes para baixo.
             </p>
             <p>
-            When you are happy with your code, press the Assemble button, and the LMC Simulator will check and
-            assemble your code into memory.  If there are any errors, a message will appear in the Console window
-            indicating the line and problem.
+            Quando estiver satisfeito com seu código, pressione o botão Converter e o Simulador LMC verificará e montará seu código na memória. 
+            Se houver algum erro, uma mensagem aparecerá na janela do Console indicando a linha e o problema.
             </p>
             <p>
-            The Load button can be used to load pre-written programs from your computer.
+            O botão Inserir pode ser usado para carregar programas pré-escritos do seu computador.
             </p>
             <p>
-            The Save button will save a text file on your computer containing the current program.
+            O botão Salvar armazena um arquivo de texto em seu computador contendo o programa atual.
             </p>
             <p>
-            The Print button will create and download a PDF version of the current program.
+            O botão Imprimir criar e armazena uma versão em PDF do programa atual.
             </p>
           </div>
           <div class="modal-footer">
-            <button id="help-close-btn" class="button" onclick="closeHelp()" data-bs-dismiss="modal">Close</button>
+            <button id="help-close-btn" class="button" onclick="closeHelp()" data-bs-dismiss="modal">Fechar</button>
           </div>
         </div>
       </div>
@@ -288,35 +286,33 @@
         <div class="modal-content">
           <div class="header">
             <i class="fa-solid fa-circle-info fa-2x" style="margin: 8px 8px;"></i>
-            <h4 class="modal-title" style="margin-left: 8px;">About the Little Man Computer</h4>
+            <h4 class="modal-title" style="margin-left: 8px;">Sobre o Simulador</h4>
           </div>
           <div class="modal-body">
             <p>
-            The Little Man Computer (LMC) is a simplified model of a computer, based on the von Neumann architecture.
+            O Little Man Computer (LMC) é um modelo simplificado de computador, baseado na arquitetura von Neumann.
             </p>
             <p>
-            This web app provides a simulation of the LMC, so that you can write programs in the LMC assembler
-            and then assemble and run the programs.  The simulator will show you the state of all of the main
-            registers in the CPU, as well as the state of the 'memory' of the LMC.
+            Este aplicativo web fornece uma simulação do LMC, para que você possa escrever programas no assembler 
+            do LMC e depois montar e executar os programas. O simulador mostrará o estado de todos os registros 
+            principais da UCP, bem como o estado da 'memória' do LMC.
             </p> 
             <p>
-            The flow of data around the CPU is displayed, and you can pause and resume the execution of your
-            program at any time.
+            O fluxo de dados ao redor do UCP é exibido e você pode pausar e retomar a execução do seu programa a qualquer momento.
             </p> 
             <p>
-            The code editor has individual columns for labels, operators and operands.  To learn more about how the editor
-            works, just press the 'Editor' button below.
-            You can use Ctrl-Z to undo any editor actions.
+            O editor de código possui colunas individuais para rótulos, operadores e operandos. Para saber mais sobre como funciona o 
+            editor, basta pressionar o botão ‘Editor’ abaixo.
+            Você pode usar Ctrl-Z para desfazer qualquer ação do editor.
             </p>
             <p>
-            There are a number of example programs that you can try out - just press the 'Examples' button
-            below for more information.
+            Existem vários programas de exemplo que você pode experimentar - basta pressionar o botão 'Exemplos' abaixo para obter mais informações.
             </p>
           </div>
           <div class="modal-footer">
-            <button id="rabout-close-btn" class="button" onclick="closeAbout()" data-bs-dismiss="modal">Close</button>
-            <button id="instruction-set-modal-btn" class="button" data-bs-toggle="modal" data-bs-target="#instructionSetModal">Instructions</button>
-            <button id="examples-modal-btn" class="button" data-bs-toggle="modal" data-bs-target="#examplesModal">Examples</button>
+            <button id="rabout-close-btn" class="button" onclick="closeAbout()" data-bs-dismiss="modal">Fechar</button>
+            <button id="instruction-set-modal-btn" class="button" data-bs-toggle="modal" data-bs-target="#instructionSetModal">Instruções</button>
+            <button id="examples-modal-btn" class="button" data-bs-toggle="modal" data-bs-target="#examplesModal">Exemplos</button>
             <button id="help-modal-btn" class="button" data-bs-toggle="modal" data-bs-target="#helpModal">Editor</button>
           </div>
         </div>
@@ -330,78 +326,78 @@
         <div class="modal-content">
           <div class="header">
             <i class="fa-solid fa-table-list fa-2x" style="margin: 8px 8px;"></i>
-            <h4 class="modal-title" style="margin-left: 8px;">Little Man Computer Instruction Set</h4>
+            <h4 class="modal-title" style="margin-left: 8px;">Conjunto de Instruções LMC</h4>
           </div>
           <div class="modal-body">
             <table class="table" id="instruction-set-table">
               <thead>
                 <tr>
-                  <th scope="col">Instruction (Mnemonic)</th>
-                  <th scope="col">Machine Code</th>
-                  <th scope="col">Explanation</th>
+                  <th scope="col">Instrução (Menemônico)</th>
+                  <th scope="col">Código de Máquina</th>
+                  <th scope="col">Descrição</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <th scope="row">Load Accumulator (LDA)</th>
                   <td>5xx</td>
-                  <td>Load the contents of the given memory address (xx) into the Accumulator</td>
+                  <td>Insira o conteúdo do endereço de memória (xx) no Acumulador.</td>
                 </tr>
                 <tr>
                   <th scope="row">Store Accumulator (STA)</th> 
                   <td>3xx</td> 
-                  <td>Store the contents of the Accumulator at the given memory address (xx)</td> 
+                  <td>Armazene o conteúdo do Acumulador no endereço de memória indicado em (xx).</td> 
                 </tr>
                 <tr>
                   <th scope="row">Add (ADD)</th> 
                   <td>1xx</td> 
-                  <td>Add the contents of the given memory address (xx) to the value in the Accumulator</td> 
+                  <td>Adicione o conteúdo do endereço de memória fornecido (xx) ao valor no acumulador</td> 
                 </tr>
                 <tr>
                   <th scope="row">Subtract (SUB)</th> 
                   <td>2xx</td> 
-                  <td>Subtract the contents of the given memory address (xx) from the value in the Accumulator</td> 
+                  <td>Subtraia o conteúdo do endereço de memória fornecido (xx) do valor no acumulador</td> 
                 </tr>
                 <tr>
                   <th scope="row">Input (INP)</th> 
                   <td>901</td> 
-                  <td>Copy the value from the Input 'mailbox' into the Accumulator</td> 
+                  <td>Copie o valor do dispositivo de entrada para o acumulador</td> 
                 </tr>
                 <tr>
                   <th scope="row">Output (OUT)</th> 
                   <td>902</td> 
-                  <td>Copy the value from the Accumulator into the Output 'mailbox'</td> 
+                  <td>Copie o valor do Acumulador para o dispositivo de entrada.</td> 
                 </tr>
                 <tr>
                   <th scope="row">Branch (BRA)</th> 
                   <td>6xx</td> 
-                  <td>Branch (jump) to the instruction at the given memory address (xx)</td> 
+                  <td>Desvie a execução para a instrução no endereço de memória fornecido (xx)</td> 
                 </tr>
                 <tr>
                   <th scope="row">Branch if positive (BRP)</th> 
                   <td>8xx</td> 
-                  <td>If the value in the Accumulator is positive (including zero), then branch to the instruction at the given memory address (xx)</td> 
+                  <td>Se o valor no Acumulador for positivo (incluindo zero), então desvie para a instrução no endereço de memória fornecido (xx)</td> 
                 </tr>
                 <tr>
                   <th scope="row">Branch if zero (BRZ)</th> 
                   <td>7xx</td> 
-                  <td>If the value in the Accumulator is zero, then branch to the instruction at the given memory address (xx)</td> 
+                  <td>Se o valor no acumulador for zero, então desvie para a instrução no endereço de memória fornecido (xx)</td> 
                 </tr>
                 <tr>
                   <th scope="row">Halt (HLT)</th> 
                   <td>000</td> 
-                  <td>Stop execution of the program</td> 
+                  <td>Pare o ciclo de instrução.</td> 
                 </tr>
                 <tr>
                   <th scope="row">Data (DAT)</th> 
-                  <td>value of the data</td> 
-                  <td>Indicates that the current memory address holds a data value</td> 
+                  <td>valor do dado</td> 
+                  <td>Indica que o endereço de memória contém um valor de dados</td> 
                 </tr>
               </tbody>
             </table>
           </div>
           <div class="modal-footer">
-            <button id="rinstruction-set-close-btn" class="button" data-bs-dismiss="modal">Close</button>
+            <button id="rinstruction-set-close-btn" class="button" data-bs-dismiss="modal">Fechar</button>
           </div>
         </div>
       </div>
