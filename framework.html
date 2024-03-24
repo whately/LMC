@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LMC Simulator v1.0</title>
+    <title>Simulador LMC v1.0</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/5.1.8/css/tabulator_midnight.min.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <script src="framework.js"></script>
@@ -15,7 +15,7 @@
   <body onresize="resizeEvent()" onload="filltable()">
 
     <div class="header">
-      <p>LMC Simulator</p>
+      <p>Simulador LMC</p>
       <div style="margin-left: auto;">
         <button id="save-btn" class="icon-button" title="Save program to file" onclick="saveCode()"><i class="fa-solid fa-file-arrow-down fa-lg"></i></button>
         <button id="hide-load-btn" class="icon-button" title="Load program from file" onclick="document.getElementById('load-btn').click()"><i class="fa-solid fa-file-arrow-up fa-lg"></i></button>
@@ -29,8 +29,8 @@
       <div class="row content" id="code-table" style="flex: 0 1 auto;" ></div>
       <div class="footer" id="code-table-buttons" class="footer">
         <input id="load-btn" type="file" style="display:none;">
-        <button id="assemble-button" class="button" onclick="assembleCode()">Assemble</button>
-        <button id="clear-button" onclick="clearCode()" class="button">Clear</button>
+        <button id="assemble-button" class="button" onclick="assembleCode()">Converter</button>
+        <button id="clear-button" onclick="clearCode()" class="button">Limpar</button>
       </div>
     </div>
     
@@ -39,28 +39,28 @@
     </div>
 
     <div class="memory" id="memory-table">
-      <p>Memory</p>
+      <p>Memória</p>
     </div>
 
     <div class="controls">
-      <button id="run-btn" class="button" onclick="runCode()">Run</button>
-      <button id="stop-btn" class="button" onclick="allStop()">Stop</button>
-      <button id="resume-btn" class="button" onclick="allAhead()">Resume</button>
-      <button id="next-btn" class="button" onclick="stepCode()">Next</button>
-      <p id="state-label" style="margin:0px;">Ready</p>
+      <button id="run-btn" class="button" onclick="runCode()">Executar</button>
+      <button id="stop-btn" class="button" onclick="allStop()">Parar</button>
+      <button id="resume-btn" class="button" onclick="allAhead()">Voltar</button>
+      <button id="next-btn" class="button" onclick="stepCode()">Próximo</button>
+      <p id="state-label" style="margin:0px;">Pronto</p>
     </div>
 
     <div class="ioConsole">
       <div id="io-div" style="display:flex; flex-direction:column; margin:0px;">
         <div id="input-div" style="background-color: #ee99ee;padding:8px; align-items: center;">
           <p id="output-holder">
-            <span style="background-color: #ee99ee; color: #000000; padding: 8px;">Input:</span>
+            <span style="background-color: #ee99ee; color: #000000; padding: 8px;">Entrada:</span>
             <input type="number" id="input-text" min="0" max="999" >
-            <button onclick="processInput()" id="input-button">Enter</button>
+            <button onclick="processInput()" id="input-button">Entrar</button>
           </p>
         </div>
         <div id="output-div" style="flex: 1; background-color: #ee99ee;padding:8px;"><p style="margin:0px;">
-          <span style="background-color: #ee99ee; color: #000000; padding: 8px;">Output:</span>
+          <span style="background-color: #ee99ee; color: #000000; padding: 8px;">Saídat:</span>
           <textarea id="output-text" rows="8" readonly="true"></textarea>
         </div>
       </div>
@@ -86,22 +86,22 @@
           <div class="modal-header">
             <i class="fa-solid fa-gear fa-2x" style="margin: 8px 8px;"></i>
             <button class="icon-button" id="settings-close-btn" style="float: right;"onclick="cancelSettings()"><i class="fa-solid fa-circle-xmark fa-2x"></i></button>
-            <h4 class="modal-title" style="margin-left: 8px;">LMC Simulation Settings</h4>
+            <h4 class="modal-title" style="margin-left: 8px;">Configuração do Simulador</h4>
           </div>
           <div class="modal-body">
             <input type="checkbox" name="showDataFlows" value="1" checked id="setting-show-data-flows" style="margin:8px;">
-            <label for="showDataFlows">Show data flows around the CPU during program execution</label><br>
+            <label for="showDataFlows">Mostrar fluxos de dados ao redor da CPU durante a execução do programa</label><br>
             <input type="checkbox" name="showVariableValuesInCode" value="1" checked id="setting-show-variable-values" style="margin:8px;">
-            <label for="showDataFlows">Show variable values in the code table during program execution</label><br>
+            <label for="showDataFlows">Mostrar valores de variáveis na tabela de códigos durante a execução do programa</label><br>
             <input type="checkbox" name="showMemoryAccess" value="1" checked id="setting-show-memory-access" style="margin:8px;">
-            <label for="showMemoryAccess">Show memory read/write locations during program execution</label><br><br>
+            <label for="showMemoryAccess">Mostrar locais de leitura/escrita de memória durante a execução do programa</label><br><br>
             <input type="range" name="executionSpeed" id="setting-speed" min="0" max="4" step="1" value="2" onchange="changeSetting('speed')">
-            <label for="setting-speed">Execution Speed</label><br><br>
-            <p id="speed-display"><i class="fa-regular fa-hand"></i>Run at Medium speed - about 0.5 seconds per cycle</p>
+            <label for="setting-speed">Taxa de execução</label><br><br>
+            <p id="speed-display"><i class="fa-regular fa-hand"></i>Execute em taxa média – cerca de 0,5 segundos por ciclo</p>
           </div>
           <div class="modal-footer">
-            <button id="settings-cancel-btn" class="button" onclick="cancelSettings()">Cancel</button>
-            <button id="settings-save-btn" class="button" onclick="saveSettings()">Save</button>
+            <button id="settings-cancel-btn" class="button" onclick="cancelSettings()">Cancelar</button>
+            <button id="settings-save-btn" class="button" onclick="saveSettings()">Salvar</button>
           </div>
         </div>
       </div>
@@ -114,30 +114,30 @@
           <div class="modal-header">
             <i class="fa-solid fa-file-code fa-2x" style="margin: 8px 8px;"></i>
             <button class="icon-button" id="examples-close-btn" style="float: right;"><i class="fa-solid fa-circle-xmark fa-2x"></i></button>
-            <h4 class="modal-title" style="margin-left: 8px;">LMC Example Programs</h4>
+            <h4 class="modal-title" style="margin-left: 8px;">Programas Exemplos</h4>
           </div>
           <div class="modal-body">
-            <p>Select an example to load:</p>
+            <p>Selecione um exemplo para inserir:</p>
             <div>
               <input type="radio" id="example1" name="example_select" value=1 checked>
-              <label for="example1">Example 1 - Add two numbers together</label>
+              <label for="example1">Exemplo 1 - Some dois números</label>
             </div>
             <div>
               <input type="radio" id="example2" name="example_select" value=2>
-              <label for="example2">Example 2 - Output a pattern of 1s and 0s</label>
+              <label for="example2">Exemplo 2 - Gere um padrão de 1s e 0s</label>
             </div>
             <div>
               <input type="radio" id="example3" name="example_select" value=3>
-              <label for="example3">Example 3 - Calculate the square of a number</label>
+              <label for="example3">Exemplo 3 - Calcule o quadrado de um número</label>
             </div>
             <div>
               <input type="radio" id="example4" name="example_select" value=4>
-              <label for="example4">Example 4 - Integer division</label>
+              <label for="example4">Example 5 - Divisão inteira</label>
             </div>
           </div>
           <div class="modal-footer" style="margin-top:20px;">
-            <button id="examples-close-btn" class="button" onclick="closeExamples()">Cancel</button>
-            <button id="examples-load-btn" class="button" onclick="loadExample()">Load</button>
+            <button id="examples-close-btn" class="button" onclick="closeExamples()">Cancelar</button>
+            <button id="examples-load-btn" class="button" onclick="loadExample()">Inserir</button>
           </div>
         </div>
       </div>
