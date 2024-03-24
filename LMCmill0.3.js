@@ -279,11 +279,11 @@ var blankmemorytabledata = [
 // Execution speeds - we also have the Next button which steps.
 //
 const speeds = {
-  SUPERSLOW: "<i class='fa-regular fa-hand'></i>  Explain Everything - around 2 seconds per cycle",
-  SLOW: "<i class='fa-solid fa-person-walking'></i>  Run Slow - about 1 second per cycle",
-  MEDIUM: "<i class='fa-solid fa-person-running'></i>  Run at Medium speed - about 0.5 seconds per cycle",
-  FAST: "<i class='fa-solid fa-bicycle'></i>  Run at Fast speed - about 0.25 seconds per cycle",
-  SUPERFAST: "<i class='fa-solid fa-rocket'></i>  Just Run!  About 0.1 seconds per cycle",
+  SUPERSLOW: "<i class='fa-regular fa-hand'></i>  Descreva tudo - ~ 2 segundos por ciclo",
+  SLOW: "<i class='fa-solid fa-person-walking'></i>  Execute lentamente - ~ 1 segundo por ciclo",
+  MEDIUM: "<i class='fa-solid fa-person-running'></i>  Execute na taxa média - ~ 0.5 segundos por ciclo",
+  FAST: "<i class='fa-solid fa-bicycle'></i>  Execute na taxa alta - ~ 0.25 segundos por ciclo",
+  SUPERFAST: "<i class='fa-solid fa-rocket'></i>  Execute!  ~ 0.1 segundos por ciclo",
 }
 
 
@@ -293,15 +293,15 @@ const speeds = {
 // (through to the end of execution) to support pause/resume/step.
 //
 const states = {
-  UNASSEMBLED: "Unassembled",
-  ASSEMBLED: "Assembled",
+  UNASSEMBLED: "Não convertido",
+  ASSEMBLED: "Convertido",
   RUNNING: {
-    "ACTIVE": "Active",
-    "BLOCKEDONINPUT": "Waiting for input",
-    "PAUSED": "Paused",
-    "STOPPING": "Stopping...",
+    "ACTIVE": "Ativo",
+    "BLOCKEDONINPUT": "Esperando o dado",
+    "PAUSED": "Pausa",
+    "STOPPING": "Parando...",
   },
-  STOPPED: "Stopped",
+  STOPPED: "Parado",
   HALTED: "Halted",
 }
 
@@ -1229,7 +1229,7 @@ function processInput(){
 
     if (userInput.length == 0) {
       let logobj=document.getElementById("log-text");
-      logobj.value += "> ERROR:  Invalid input value.\n";
+      logobj.value += "> ERRO:  Valor de entrada inválido.\n";
       logobj.scrollTop = logobj.scrollHeight;
       return;
     }
@@ -1238,14 +1238,14 @@ function processInput(){
     
     if ((trial > 999) || (trial < -999)) {
       let logobj=document.getElementById("log-text");
-      logobj.value += "> ERROR:  Invalid input value.  Must be between -999 and +999\n";
+      logobj.value += "> ERRO:  Valor de entrada inválido. Deve ser entre -999 e +999\n";
       logobj.scrollTop = logobj.scrollHeight;
       return;
     }
 
     
     let logobj=document.getElementById("log-text");
-    logobj.value += "> EXECUTE:  Transferring input to accumulator: " + userInput + "\n";
+    logobj.value += "> EXECUTA:  Transferindo a entrada para acumulador: " + userInput + "\n";
     logobj.scrollTop = logobj.scrollHeight;
     accumulator = parseInt(userInput);
 
@@ -1278,7 +1278,7 @@ function processInput(){
     // ... if not, log and ignore
     //
     let logobj=document.getElementById("log-text");
-    logobj.value += "> Input fired, but processor not waiting: " + state + " - ignored\n";
+    logobj.value += "> Dado inserido na Entrada, mas processador não está esperando: " + state + " - ignorado\n";
     logobj.scrollTop = logobj.scrollHeight;
   }
 }
@@ -1329,29 +1329,29 @@ function printCode(){
 // LMC Instruction Set
 //
 const opcodesLMC = [{mnemonic: "ADD", mc:"1xx", name: "Add", 
-                     description: "Add the contents of the given memory location to the accumulator"}, 
+                     description: "Adicione os conteúdos da memória e Acumulador"}, 
                     {mnemonic: "SUB", mc:"2xx", name: "Subtract", 
-                     description: "Subtract the contents of the given memory location from the accumulator"},
+                     description: "Subtraia o conteúdo da memória do Acumulador"},
                     {mnemonic: "STA", mc:"3xx", name: "Store Accumulator", 
-                     description: "Copy the value in the Accumulator to the given memory address"},
+                     description: "Copie o valor do Acumulador para o endereço de memória dado"},
                     {mnemonic: "LDA", mc:"5xx", name: "Load Accumulator", 
-                     description: "Copy the value from the given memory location into the Accumulator"},
+                     description: "Copie o valor do endereço de memória dado para o Acumulador"},
                     {mnemonic: "BRA", mc:"6xx", name: "Branch", 
-                     description: "Set the Program Counter to the given memory location"},
+                     description: "Preencha o Contador de Programa com o endereço de memória dado"},
                     {mnemonic: "BRZ", mc:"7xx", name: "Branch if Accumulator Zero", 
-                     description: "If the value in the Accumulator is zero,then set the Program Counter"
-                       +" to the given memory location"},
+                     description: "Se o valor do Acumulador é zero, preencha o Contador de Programa"
+                       +" com o endereço de memória dado"},
                     {mnemonic: "BRP", mc:"8xx", name: "Branch if Accumulator Positive", 
-                     description: "If the value in the Accumulator is positive, then set the Program"
-                       +" Counter to the given memory location"},
+                     description: "Se o valor do Acumulador é positivo, preencha Contador de Programa"
+                       +"com o endereço de memória dado"},
                     {mnemonic: "INP", mc:"901", name: "Input", 
-                     description: "Copy the value from the 'Input' box into the Accumulator"},
+                     description: "Copie o valor do dispositivo de entrada para o Acumulador"},
                     {mnemonic: "OUT", mc:"902", name: "Output", 
-                     description: "Copy the value in the Accumulator to the 'Output' box"},
+                     description: "Copie o valor do Acumulador para o dispositivo de saída"},
                     {mnemonic: "DAT", mc:"xxx", name: "Data", 
-                     description: "Set the given memory location to the supplied value"},
+                     description: "Preencha a posição de memória com o valor indicado"},
                     {mnemonic: "HLT", mc:"000", name: "End program", 
-                     description: "Instructs the processor to stop executing instructions"},
+                     description: "Pare o ciclo de instrução"},
                    ];
 
 
@@ -1471,7 +1471,7 @@ function runCode() {
   intervalHandle = setInterval(nextInstruction, getDelay());
   
   let logobj=document.getElementById("log-text");
-  logobj.value += "> Starting execution...\n";
+  logobj.value += "> Iniciando a execução...\n";
   logobj.scrollTop = logobj.scrollHeight;
 
   //
@@ -1514,9 +1514,9 @@ var previousHighlightRow = -1;
 var previousHighlightCellName = "m-1";
 
 const executionStages = {
-  FETCH: "fetch",
-  DECODE: "decode",
-  EXECUTE: "execute",
+  FETCH: "buscar",
+  DECODE: "decodificar",
+  EXECUTE: "executar",
 }
 
 var execStage = executionStages.FETCH;
@@ -1589,7 +1589,7 @@ function fetchInstruction() {
       animateBus(ctx, 0);
 
       let logobj=document.getElementById("log-text");
-      logobj.value += "> FETCH:  Reading instruction from RAM\n";
+      logobj.value += "> BUSCA:  Lendo instrução da RAM\n";
       logobj.scrollTop = logobj.scrollHeight;
     }
     memoryAddressRegister = formattedPC;
@@ -1777,7 +1777,7 @@ function decodeInstructionOCR() {
   }
 
   let logobj=document.getElementById("log-text");
-  logobj.value += "> DECODE:  " + currentInstructionRegister + " = " + instructionCode + ": " + instructionDetails + "\n";
+  logobj.value += "> DECODIFICA:  " + currentInstructionRegister + " = " + instructionCode + ": " + instructionDetails + "\n";
   logobj.scrollTop = logobj.scrollHeight;
 
   formattedPC = programCounter.toString().padStart(2, "0");
@@ -1956,7 +1956,7 @@ function decodeInstructionCAIE() {
   }
 
   let logobj=document.getElementById("log-text");
-  logobj.value += "> DECODE:  " + currentInstructionRegister + " = " + instructionCode + ": " + instructionDetails + "\n";
+  logobj.value += "> DECODIFICA:  " + currentInstructionRegister + " = " + instructionCode + ": " + instructionDetails + "\n";
   logobj.scrollTop = logobj.scrollHeight;
 
   formattedPC = programCounter.toString().padStart(2, "0");
@@ -2079,13 +2079,13 @@ function executeInstruction() {
       if (settingSpeed != speeds.SUPERFAST) {
         animateBus(ctx, 11);
         let logobj=document.getElementById("log-text");
-        logobj.value += "> EXECUTE:  BRP: Branching as Accumulator is " + accumulator + "\n";
+        logobj.value += "> EXECUTA:  BRP: Desviando a execução pois Acumulador é " + accumulator + "\n";
         logobj.scrollTop = logobj.scrollHeight;
       }
     } else {
       if (settingSpeed != speeds.SUPERFAST) {
         var logobj=document.getElementById("log-text");
-        logobj.value += "> EXECUTE:  BRP: Not branching as Accumulator is " + accumulator + "\n";
+        logobj.value += "> EXECUTA:  BRP: Não desviando a execução pois Acumulador é " + accumulator + "\n";
         logobj.scrollTop = logobj.scrollHeight;
       }
     }
@@ -2098,7 +2098,7 @@ function executeInstruction() {
     if (type == "01"){
 //      animateBus(ctx, 4);
       let logobj=document.getElementById("log-text");
-      logobj.value += "> EXECUTE:  Waiting for input (to accumulator)\n";
+      logobj.value += "> EXECUTA:  Esperando pelo dado na Entrada\n";
       logobj.scrollTop = logobj.scrollHeight;
       let outobj=document.getElementById("input-text");
       outobj.value = "";
@@ -2114,7 +2114,7 @@ function executeInstruction() {
       outobj.scrollTop = outobj.scrollHeight;
 
       let logobj=document.getElementById("log-text");
-      logobj.value += "> EXECUTE:  OUT: Transferring value in Accumulator to Output\n";
+      logobj.value += "> EXECUTA:  OUT: Transferindo valor no Acumulador para a Saída\n";
       logobj.scrollTop = logobj.scrollHeight;
 
       // Update the Output Mailbox
@@ -2126,7 +2126,7 @@ function executeInstruction() {
 
   if (currentInstructionRegister == "000"){
     let logobj=document.getElementById("log-text");
-    logobj.value += "> EXECUTE:  HALT instruction found\n";
+    logobj.value += "> EXECUTA:  encontrou a instrução HALT\n";
     allHalt();
   }
   
@@ -2216,17 +2216,17 @@ function writeMemory(addressString, data){
 
   if (settingSpeed != speeds.SUPERFAST) {
     let logobj=document.getElementById("log-text");
-    logobj.value += "> EXECUTE:  Writing memory at " + addressString + ": Contents: " + data + "\n";
+    logobj.value += "> EXECUTA:  Escrevendo na posição de memória " + addressString + ": Conteúdo: " + data + "\n";
     logobj.scrollTop = logobj.scrollHeight;
   }
 
   if (address > 99){
-    console.log("Error - memory address out of range: " + addressString);
+    console.log("Erro - o endereço de memória está fora do limite: " + addressString);
     return;
   }
 
   if (address < 0){
-    console.log("Error - memory address out of range: " + addressString);
+    console.log("Erro - o endereço de memória está fora do limite: " + addressString);
     return;
   }
 
@@ -2297,12 +2297,12 @@ function readMemory(addressString){
   addressString = addressString.padStart(2, "0");
   
   if (address > 99){
-    console.log("Error - memory address out of range: " + addressString);
+    console.log("Erro - endereço de memória está acima do limite: " + addressString);
     return;
   }
 
   if (address < 0){
-    console.log("Error - memory address out of range: " + addressString);
+    console.log("Error - endereço de memória está abaixo do limite: " + addressString);
     return;
   }
 
@@ -2330,9 +2330,9 @@ function readMemory(addressString){
   if (settingSpeed != speeds.SUPERFAST) {
     let logobj=document.getElementById("log-text");
     if (execStage == executionStages.FETCH) {
-      logobj.value += ">    Reading memory at " + addressString + ": Contents: " + memorycontentdata + "\n";
+      logobj.value += ">    lendo a memória em " + addressString + ": Conteúdo: " + memorycontentdata + "\n";
     } else {
-      logobj.value += "> EXECUTE:  Reading memory at " + addressString + ": Contents: " + memorycontentdata + "\n";
+      logobj.value += "> EXECUTA:  lendo a memória em " + addressString + ": Conteúdo: " + memorycontentdata + "\n";
     }
     logobj.scrollTop = logobj.scrollHeight;
   }
@@ -2380,7 +2380,7 @@ function assembleCodeLMC() {
   //
   var timestamp = new Date().toLocaleTimeString('en-GB', {hour: "numeric", minute: "numeric", second: "numeric"});
   var logobj=document.getElementById("log-text");
-  logobj.value = "> ASSEMBLY:  Started assembly at " + timestamp + "\n";
+  logobj.value = "> CONVERTE:  Iniciou a conversão em " + timestamp + "\n";
 
   //
   // Clear out Symbol Table (in a memory-friendly way) and reset count
@@ -2417,12 +2417,12 @@ function assembleCodeLMC() {
       //
       for (let s=0; s < symbolTable.length; s++) {
         if (symbolTable[s]['symbol'] == label) {
-          let errString = "> Error, line " + i + ": duplicate symbol: " + symbolTable[s]['symbol'] + "\n";
+          let errString = "> Erro, linha " + i + ": símbolo duplicado: " + symbolTable[s]['symbol'] + "\n";
           reportAssemblyError(i+1, errString);
           return;
         }
       }
-      symbolTable.push({"symbol": label, "value": i });
+      symbolTable.push({"símbolo": label, "valor": i });
     }
 
     var foundOpcode = false;
@@ -2434,12 +2434,12 @@ function assembleCodeLMC() {
     }
 
     if (!foundOpcode && operator != "") {
-      let errString = "> Error, line " + i + ": unrecognised opcode: " + currentLine['operator'] + "\n";
+      let errString = "> Erro, linha " + i + ": opcode desconhecido: " + currentLine['operator'] + "\n";
       reportAssemblyError(i+1, errString);
       return;
     }
   }
-  logobj.value += "> ASSEMBLY:  Symbol table built\n";
+  logobj.value += "> CONVERTE:  Tabela de Símbolos criada\n";
   logobj.scrollTop = logobj.scrollHeight;
 
   //
@@ -2491,7 +2491,7 @@ function assembleCodeLMC() {
               var datum = operand;
               var datumValue = parseInt(datum);
               if ((datumValue < -999) || (datumValue > 999)) {
-                let errString = "> Error, line " + i + ": value out of range: " + currentLine['operand'] + "\n";
+                let errString = "> Erro, linha " + i + ": valor fora do limite: " + currentLine['operand'] + "\n";
                 reportAssemblyError(i+1, errString);
                 return;
               }
@@ -2522,7 +2522,7 @@ function assembleCodeLMC() {
                   target = operandValue;
                 } else {
                   //let errString = "> Error, line " + i + ": symbol not found: " + currentLine['operand'] + "\n";
-                  let errString = "> Error, line " + i + ": symbol not found: " + currentLine['operand'] + " " + operand + "\n";
+                  let errString = "> Erro, linha " + i + ": símbolo não encontrado: " + currentLine['operand'] + " " + operand + "\n";
                   reportAssemblyError(i+1, errString);
                   return;
                 }
@@ -2537,7 +2537,7 @@ function assembleCodeLMC() {
               mc = originalmc.replace("xx", target);
             }
           } else {
-            let errString = "> Error, line " + i + ": machine code instruction " + currentLine['operator'] + " should not have an operand\n";
+            let errString = "> Erro, linha " + i + ": instrução de código de máquina " + currentLine['operator'] + " não deveria ter um operando\n";
             reportAssemblyError(i+1, errString);
             return;
           }
@@ -2548,7 +2548,7 @@ function assembleCodeLMC() {
           // opcode is DAT, in which case an absent operand is OK.
           //
           if (opcodesLMC[j]['mc'].includes("xx") && opcodesLMC[j]['mnemonic'] != "DAT") {
-            let errString = "> Error, line " + i + ": machine code instruction " + currentLine['operator'] + " requires an operand\n";
+            let errString = "> Erro, linha " + i + ": instrução de código de máquina " + currentLine['operator'] + " requer um operando\n";
             reportAssemblyError(i+1, errString);
             return;
           } else {
@@ -2584,7 +2584,7 @@ function assembleCodeLMC() {
   }
 
   var timestamp = new Date().toLocaleTimeString('en-GB', {hour: "numeric", minute: "numeric", second: "numeric"});
-  logobj.value += "> ASSEMBLY:  Assembly completed at " + timestamp + "\n";
+  logobj.value += "> CONVERTE:  Conversão completada em " + timestamp + "\n";
   logobj.scrollTop = logobj.scrollHeight;
   changeState(states.ASSEMBLED);
 
@@ -2630,7 +2630,7 @@ function reportAssemblyError(lineNo, errString){
   var logobj=document.getElementById("log-text");
 
   logobj.value += errString;
-  logobj.value += "> ASSEMBLY:  Assembly failed\n";
+  logobj.value += "> CONVERTE:  Conversão falhou\n";
   logobj.scrollTop = logobj.scrollHeight;
   table1.deselectRow();
   table1.selectRow(lineNo);
@@ -2647,7 +2647,7 @@ function assembleCodeCAIE() {
   //
   // Clear log (by setting logobj value to a new string) and log start time
   //
-  var timestamp = new Date().toLocaleTimeString('en-GB', {hour: "numeric", minute: "numeric", second: "numeric"});
+  var timestamp = new Date().toLocaleTimeString('pt-BR', {hora: "numeric", minuto: "numeric", segundo: "numeric"});
   var logobj=document.getElementById("log-text");
   logobj.value = "> CAIE ASSEMBLY:  Started assembly at " + timestamp + "\n";
 
@@ -2686,12 +2686,12 @@ function assembleCodeCAIE() {
       //
       for (let s=0; s < symbolTable.length; s++) {
         if (symbolTable[s]['symbol'] == label) {
-          let errString = "> Error, line " + i + ": duplicate symbol: " + symbolTable[s]['symbol'] + "\n";
+          let errString = "> Erro, linha " + i + ": símbolo duplicado: " + symbolTable[s]['symbol'] + "\n";
           reportAssemblyError(i+1, errString);
           return;
         }
       }
-      symbolTable.push({"symbol": label, "value": i });
+      symbolTable.push({"símbolo": label, "valor": i });
     }
 
     var foundOpcode = false;
@@ -2703,12 +2703,12 @@ function assembleCodeCAIE() {
     }
 
     if (!foundOpcode && operator != "") {
-      let errString = "> Error, line " + i + ": unrecognised opcode: " + currentLine['operator'] + "\n";
+      let errString = "> Erro, linha " + i + ": opcode não reconhecido: " + currentLine['operator'] + "\n";
       reportAssemblyError(i+1, errString);
       return;
     }
   }
-  logobj.value += "> ASSEMBLY:  Symbol table built\n";
+  logobj.value += "> Converte:  Tabela de Símbolos  criada \n";
   logobj.scrollTop = logobj.scrollHeight;
 
   //
@@ -2763,7 +2763,7 @@ function assembleCodeCAIE() {
               var datum = operand;
               var datumValue = parseInt(datum);
               if ((datumValue < -999) || (datumValue > 999)) {
-                let errString = "> Error, line " + i + ": value out of range: " + currentLine['operand'] + "\n";
+                let errString = "> Erro, linha " + i + ": valor fora do limite: " + currentLine['operand'] + "\n";
                 reportAssemblyError(i+1, errString);
                 return;
               }
@@ -2794,7 +2794,7 @@ function assembleCodeCAIE() {
                   target = operandValue;
                 } else {
                   //let errString = "> Error, line " + i + ": symbol not found: " + currentLine['operand'] + "\n";
-                  let errString = "> Error, line " + i + ": symbol not found: " + currentLine['operand'] + " " + operand + "\n";
+                  let errString = "> Erro, linha " + i + ": símbolo não encontrado: " + currentLine['operand'] + " " + operand + "\n";
                   reportAssemblyError(i+1, errString);
                   return;
                 }
@@ -2810,7 +2810,7 @@ function assembleCodeCAIE() {
               mc = originalmc + target;
             }
           } else {
-            let errString = "> Error, line " + i + ": machine code instruction " + currentLine['operator'] + " should not have an operand\n";
+            let errString = "> Erro, linha " + i + ": instrução de código de máquina" + currentLine['operator'] + " não deveria ter um operando\n";
             reportAssemblyError(i+1, errString);
             return;
           }
@@ -2821,7 +2821,7 @@ function assembleCodeCAIE() {
           // opcode is DAT, in which case an absent operand is OK.
           //
           if (opcodesCAIE[j]['mnemonic']!="IN" && opcodesCAIE[j]['mnemonic']!="OUT" && opcodesCAIE[j]['mnemonic']!="END" && opcodesCAIE[j]['mnemonic'] != "DAT") {
-            let errString = "> Error, line " + i + ": machine code instruction " + currentLine['operator'] + " requires an operand\n";
+            let errString = "> Erro, linha " + i + ": instrução de código de máquina " + currentLine['operator'] + " requer um operando\n";
             reportAssemblyError(i+1, errString);
             return;
           } else {
@@ -2856,7 +2856,7 @@ function assembleCodeCAIE() {
     table2.updateData([{id:rownum, [colref]: mc}]);
   }
 
-  var timestamp = new Date().toLocaleTimeString('en-GB', {hour: "numeric", minute: "numeric", second: "numeric"});
+  var timestamp = new Date().toLocaleTimeString('pt-BR', {hora: "numeric", minuto: "numeric", segundo: "numeric"});
   logobj.value += "> CAIE ASSEMBLY:  Assembly completed at " + timestamp + "\n";
   logobj.scrollTop = logobj.scrollHeight;
   changeState(states.ASSEMBLED);
@@ -3108,7 +3108,7 @@ function scaleCanvas(){
 //
 function handleFile() {
   let logobj=document.getElementById("log-text");
-  logobj.value += "> File Selected!\n";
+  logobj.value += "> Arquivo selecionado!\n";
   logobj.scrollTop = logobj.scrollHeight;
 
   let newData=[];
@@ -3119,7 +3119,7 @@ function handleFile() {
 
   codeReader.onload = function(event) {
     let logobj=document.getElementById("log-text");
-    logobj.value += "> File read\n";
+    logobj.value += "> Arquivo lido\n";
     logobj.scrollTop = logobj.scrollHeight;
 
     //
@@ -3141,9 +3141,9 @@ function handleFile() {
     }
 
     if (lineNumbers) {
-      logobj.value += "> File has line numbers\n";      
+      logobj.value += "> Arquivo possui linhas numeradas\n";      
     } else {
-      logobj.value += "> No line numbers found\n";
+      logobj.value += "> Não foi encontrado os números das linhas\n";
     }
 
     //
@@ -3203,7 +3203,7 @@ function handleFile() {
               operandVal = elements[3];
             }
           } else {
-            logobj.value += "Cannot make sense of line...\n";
+            logobj.value += "Não entendemos a linha...\n";
           }
           newData.push({id:(i+1), active:"-", line:lineVal, label:labelVal, operator:operatorVal, operand:operandVal});
         } else {
@@ -3237,7 +3237,7 @@ function handleFile() {
               operandVal = elements[2];
             }
           } else {
-            logobj.value += "Cannot make sense of line...\n";
+            logobj.value += "Não entendemos a linha...\n";
           }
           newData.push({id:(i+1), active:"-", line:lineVal, label:labelVal, operator:operatorVal, operand:operandVal});
         } 
@@ -3258,10 +3258,10 @@ function handleFile() {
 
     table1.setData(newData)
     .then(function(){
-      logobj.value += "> data added to table\n";
+      logobj.value += "> dados adicionados na tabela\n";
     })
     .catch(function(error){
-      logobj.value += "> ERROR: " + error +"\n";
+      logobj.value += "> ERRO: " + error +"\n";
     });
 
     // We need to change the value of the load button here, so that we can reload the same file
@@ -3444,7 +3444,7 @@ function loadExample() {
 
   // Let the user know we're loading the example
   let logobj=document.getElementById("log-text");
-  logobj.value += "> Example selected\n";
+  logobj.value += "> Exemplo selecionado\n";
   logobj.scrollTop = logobj.scrollHeight;
 
 
@@ -3477,10 +3477,10 @@ function loadExample() {
 
       table1.setData(codetabledata)
       .then(function(){
-        logobj.value += "> data added to table\n";
+        logobj.value += "> dados adicionados na tabela\n";
       })
       .catch(function(error){
-        logobj.value += "> ERROR: " + error +"\n";
+        logobj.value += "> ERRO: " + error +"\n";
       });
     }
   }
@@ -3540,18 +3540,18 @@ function canvasHitCheck(x, y) {
     tooltipX += 20;
 
     if (y >= y1 && y <= y1+canvasInfo.regHeight) {
-      description = "Program Counter\nThe Program Counter contains the address of the next instruction to be fetched from memory.\nIf you watch carefully as a program is running, you will see that the PC immediately increments by one as soon as an instruction is read from Memory.\nThe Branching instructions ('BRA', 'BRZ', and 'BRP') can change the value in the PC, causing program execution to 'jump' to the new address in Memory.";
+      description = "Program Counter\nO Contador de Programa contém o endereço da próxima instrução a ser buscada na memória.\nSe você observar atentamente enquanto um programa está sendo executado, verá que o PC aumenta imediatamente em um assim que uma instrução é lida na memória. \nAs instruções de ramificação ('BRA', 'BRZ' e 'BRP') podem alterar o valor no PC, fazendo com que a execução do programa 'pule' para o novo endereço na memória.";
       hitRegister = true;
     } else if (y >= y2 && y <= y2+canvasInfo.regHeight) {
-      description = "Current Instruction Register\nThe Current Instruction Register contains the last instruction fetched from Memory via the MDR.  Before the instruction can be executed, it must be decoded into a set of signals by the DECODER component.";
+      description = "Current Instruction Register\nO Registro de Instrução contém a última instrução buscada na memória através do MDR. Antes que a instrução possa ser executada, ela deve ser decodificada em um conjunto de sinais pelo componente DECODER.";
       hitRegister = true;
       tooltipY -= yoffset1;
     } else if (y >= y3 && y <= y3+canvasInfo.regHeight) {
-      description = "Decoder\nThe Decoder takes the instruction code from the CIR and turns it into a set of signals to control the execution of the instruction.";
+      description = "Decoder\nO Decodificador pega o código de instrução do CIR e o transforma em um conjunto de sinais para controlar a execução da instrução.";
       hitRegister = true;
       tooltipY -= yoffset2;
     } else if (y >= y4 && y <= y4+canvasInfo.regHeight) {
-      description = "Input\nThe 'mailbox' used to hold user input before it is moved to the Accumulator.  When an 'INP' instruction is executed, the user is prompted to enter a value which will be placed into this 'mailbox' and then moved into the Accumulator.";
+      description = "Input\nO dispositivo usado para receber dados do usuário. Quando uma instrução 'INP' é executada, o usuário é solicitado a inserir um valor no dispositivo de entrada e depois movido para o Acumulador.";
       hitRegister = true;
       tooltipY -= yoffset3;
     }
@@ -3569,11 +3569,11 @@ function canvasHitCheck(x, y) {
     tooltipX -= tooltipWidth/2;
 
     if (y >= y3 && y <= y3+canvasInfo.regHeight) {
-      description = "Arithmetic and Logic Unit\nThe Arithmetic and Logic Unit is responsible for the 'ADD' and 'SUB' operations.  In a modern processor, the ALU would be much more complex of course, but the Little Man Computer instruction set only has these two arithmetic operations.";
+      description = "Arithmetic and Logic Unit\nA Unidade Lógica e Aritmética é responsável pelas operações 'ADD' e 'SUB'. Em um processador moderno, a ULA seria muito mais complexa, é claro, mas o conjunto de instruções do LMC possui apenas essas duas operações aritméticas.";
       hitRegister = true;
       tooltipY -= yoffset2;
     } else if (y >= y4 && y <= y4+canvasInfo.regHeight) {
-      description = "Accumulator\nThe Accumulator normally holds the result of the latest operation carried out by the ALU, but a value can also be directly loaded into the Accumulator from Memory, using the 'LDA' instruction.  We can also write the current value of the Accumulator into Memory using the 'STA' instruction.  Finally, the Accumulator can be loaded from user input (the 'INP' instruction) or used as output to the user (the 'OUT' instruction).";
+      description = "Accumulator\nO acumulador normalmente contém o resultado da última operação realizada pela ALU, mas um valor também pode ser carregado diretamente da memória para o acumulador, usando a instrução 'LDA'. Também podemos escrever o valor atual do acumulador na memória usando a instrução 'STA'. Finalmente, o acumulador pode ser carregado a partir da entrada do usuário (a instrução 'INP') ou usado como saída para o usuário (a instrução 'OUT').";
       hitRegister = true;
       tooltipY -= yoffset3;
     }
@@ -3587,18 +3587,18 @@ function canvasHitCheck(x, y) {
     tooltipX -= tooltipWidth + 20;
 
     if (y >= y1 && y <= y1+canvasInfo.regHeight) {
-      description = "Memory Address Register\nThe Memory Address Register holds an address for a Memory location which is about to be read from, or written to.  In a read operation (which could be fetching an instruction or reading data), the value at the memory address will be retrieved and placed in the MDR.  In a write operation (as part of an 'STA' instruction), the value in the MDR will be written to Memory at this address.";
+      description = "Memory Address Register\nO registrador de endereço de memória contém um endereço para um local de memória que está prestes a ser lido ou escrito. Em uma operação de leitura (que pode buscar uma instrução ou dado), o conteúdo da memória no endereço indicado será copiado e colocado no MDR. Numa operação de escrita (como parte de uma instrução 'STA'), o valor no MDR será escrito na memória no endereço indicado no endereço.";
       hitRegister = true;
     } else if (y >= y2 && y <= y2+canvasInfo.regHeight) {
-      description = "Memory Data Register\nThe Memory Data Register holds a value which has either been read from Memory, or which is about to be written to Memory.  It is important to note that this value can be either an instruction or data.  In the case of an instruction, this will always have been read from Memory as part of the Fetch-Execute-Decode cycle.  In the case of data, the value may have been read from memory (in an 'LDA', 'SUB' or 'ADD' instruction) or be written to Memory (in an 'STA' instruction).";
+      description = "Memory Data Register\nO registro de dados de memória contém um valor que foi lido da memória ou que está prestes a ser gravado na memória. É importante observar que este valor pode ser uma instrução ou um dado. No caso de uma instrução, esta sempre terá sido lida da Memória como parte do ciclo Busca-Decodifica-Executa. No caso de dados, o valor pode ter sido lido da memória (numa instrução 'LDA', 'SUB' ou 'ADD') ou escrito na memória (numa instrução 'STA').";
       hitRegister = true;
       tooltipY -= yoffset1;
     } else if (y >= y3 && y <= y3+canvasInfo.regHeight) {
-      description = "Status Register\nThe Status Register is an important component in any modern processor.  When the ALU has completed an operation, the Status Register is updated with information about that operation.  In this simulator, only three bits are used: the Least Significant Bit (bit 0) is an overflow flag - if the result of an addition is greater than 999, or the result of a subtraction is less than -999, this flag will be set to 1.  Bit 1 is used to record whether the result of an operation is zero, and bit 2 is used to record whether the result of an operation is positive (zero or more).  Bits 1 and 2 are used in the 'BRZ' and 'BRP' operations.";
+      description = "Status Register\nO Registro de Status é um componente importante em qualquer processador moderno. Quando a ULA conclui uma operação, o Registro de Status é atualizado com informações sobre essa operação. Neste simulador, apenas três bits são usados: o Bit Menos Significativo (bit 0) é um flag de overflow - se o resultado de uma adição for maior que 999, ou o resultado de uma subtração for menor que -999, esse flag será definido como 1. O bit 1 é usado para registrar se o resultado de uma operação é zero e o bit 2 é usado para registrar se o resultado de uma operação é positivo (zero ou mais). Os bits 1 e 2 são utilizados nas operações ‘BRZ’ e ‘BRP’.";
       hitRegister = true;
       tooltipY -= yoffset2;
     } else if (y >= y4 && y <= y4+canvasInfo.regHeight) {
-      description = "Output\nThe 'mailbox' used to hold output from the Accumulator.  When an 'OUT' instruction is executed, the value currently held in the Accumulator is moved into this mailbox and then displayed to the user.";
+      description = "Output\nO dispositivo usado para mostrar o conteúdo do Acumulador. Quando uma instrução 'OUT' é executada, o valor atualmente mantido no acumulador é movido para este dispositivo e então exibido ao usuário.";
       hitRegister = true;
       tooltipY -= yoffset3;
     }
