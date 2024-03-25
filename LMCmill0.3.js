@@ -279,11 +279,11 @@ var blankmemorytabledata = [
 // Execution speeds - we also have the Next button which steps.
 //
 const speeds = {
-  SUPERSLOW: "<i class='fa-regular fa-hand'></i>  Descreva tudo - ~ 2 segundos por ciclo",
-  SLOW: "<i class='fa-solid fa-person-walking'></i>  Execute lentamente - ~ 1 segundo por ciclo",
-  MEDIUM: "<i class='fa-solid fa-person-running'></i>  Execute na taxa média - ~ 0.5 segundos por ciclo",
-  FAST: "<i class='fa-solid fa-bicycle'></i>  Execute na taxa alta - ~ 0.25 segundos por ciclo",
-  SUPERFAST: "<i class='fa-solid fa-rocket'></i>  Execute!  ~ 0.1 segundos por ciclo",
+  SUPERSLOW: "<i class='fa-regular fa-hand'></i> Descreva tudo - ~ 2 segundos por ciclo",
+  SLOW: "<i class='fa-solid fa-person-walking'></i> Execute lentamente - ~ 1 segundo por ciclo",
+  MEDIUM: "<i class='fa-solid fa-person-running'></i> Execute na taxa média - ~ 0.5 segundos por ciclo",
+  FAST: "<i class='fa-solid fa-bicycle'></i> Execute na taxa alta - ~ 0.25 segundos por ciclo",
+  SUPERFAST: "<i class='fa-solid fa-rocket'></i> Execute!  ~ 0.1 segundos por ciclo",
 }
 
 
@@ -2378,7 +2378,7 @@ function assembleCodeLMC() {
   //
   // Clear log (by setting logobj value to a new string) and log start time
   //
-  var timestamp = new Date().toLocaleTimeString('en-GB', {hour: "numeric", minute: "numeric", second: "numeric"});
+  var timestamp = new Date().toLocaleTimeString('pt-BR', {hora: "numeric", minuto: "numeric", segundo: "numeric"});
   var logobj=document.getElementById("log-text");
   logobj.value = "> CONVERTE:  Iniciou a conversão em " + timestamp + "\n";
 
@@ -2409,7 +2409,7 @@ function assembleCodeLMC() {
     label = label.trim()
     label = label.toUpperCase()
 
-    // console.log(currentLine);
+    console.log(currentLine);
 
     if (label != '') {
       //
