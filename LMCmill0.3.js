@@ -2409,7 +2409,7 @@ function assembleCodeLMC() {
     label = label.trim()
     label = label.toUpperCase()
 
-    console.log(currentLine);
+    //console.log(currentLine);
 
     if (label != '') {
       //
@@ -2422,7 +2422,7 @@ function assembleCodeLMC() {
           return;
         }
       }
-      symbolTable.push({"símbolo": label, "valor": i });
+      symbolTable.push({"symbol": label, "value": i });
     }
 
     var foundOpcode = false;
@@ -2522,7 +2522,7 @@ function assembleCodeLMC() {
                   target = operandValue;
                 } else {
                   //let errString = "> Error, line " + i + ": symbol not found: " + currentLine['operand'] + "\n";
-                  let errString = "> Erro, linha " + i + ": símbolo não encontrado: " + currentLine['operand'] + " " + operand + "\n";
+                  let errString = "> Erro, linha " + i + ":  não encontrado: " + currentLine['operand'] + " " + operand + "\n";
                   reportAssemblyError(i+1, errString);
                   return;
                 }
@@ -2686,12 +2686,12 @@ function assembleCodeCAIE() {
       //
       for (let s=0; s < symbolTable.length; s++) {
         if (symbolTable[s]['symbol'] == label) {
-          let errString = "> Erro, linha " + i + ": símbolo duplicado: " + symbolTable[s]['symbol'] + "\n";
+          let errString = "> Erro, linha " + i + ":  duplicado: " + symbolTable[s]['symbol'] + "\n";
           reportAssemblyError(i+1, errString);
           return;
         }
       }
-      symbolTable.push({"símbolo": label, "valor": i });
+      symbolTable.push({"symbol": label, "valor": i });
     }
 
     var foundOpcode = false;
@@ -2708,7 +2708,7 @@ function assembleCodeCAIE() {
       return;
     }
   }
-  logobj.value += "> Converte:  Tabela de Símbolos  criada \n";
+  logobj.value += "> Converte:  Tabela de Símbolos criada \n";
   logobj.scrollTop = logobj.scrollHeight;
 
   //
