@@ -1,7 +1,7 @@
 # LMC
 ## Simulador Little Man Computer
 
-Este site contém uma implementação do [Little Man Computer](https://pt.wikipedia.org/wiki/Little_man_computer)
+Este site contém uma implementação do [Little Man Computer](https://pt.wikipedia.org/wiki/Little_Man_Computer)
 O simulador é implementado usando JavaScript, HTML e CSS e roda inteiramente no navegador.
 Ele é totalmente funcional e inclui vários programas de exemplo.
 
